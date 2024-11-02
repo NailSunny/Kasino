@@ -1,0 +1,125 @@
+﻿<Page x:Class="Casino_besit.Pages.BalancePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Casino_besit.Pages"
+            xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
+              mc:Ignorable="d"
+        Title="История"
+        d:DesignHeight="1080"
+d:DesignWidth="1920"
+      Background="#1b1b1b">
+
+    <Grid>
+
+        <!-- Заголовок окна (TitleBar) -->
+        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,10,0,0">
+            <TextBlock Text="Баланс" FontSize="28" FontWeight="Bold" Foreground="#ffcc00" Margin="0,10,0,0"/>
+        </StackPanel>
+        <wpfui:TitleBar Title="Казино" />
+        <!-- Отображение баланса -->
+        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,60,0,0">
+            <TextBlock Text="Ваш баланс:" FontSize="20" Foreground="#ffffff" HorizontalAlignment="Center"/>
+            <TextBlock x:Name="BalanceText" Text="{Binding Balance}" FontSize="48" FontWeight="Bold" Foreground="#ffcc00" HorizontalAlignment="Center" Margin="0,10,0,20"/>
+        </StackPanel>
+
+        <!-- Кнопки управления -->
+        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,180,0,0" Orientation="Horizontal">
+            <!-- Кнопка пополнения -->
+            <wpfui:Button Content="Пополнить"  Width="150" Height="45" Background="#ff4500" Foreground="#ffffff" FontWeight="Bold"
+                      HorizontalAlignment="Center" Click="OpenDepositWindow_Click">
+                <wpfui:Button.Effect>
+                    <DropShadowEffect Color="#ff4500" ShadowDepth="0" BlurRadius="20"/>
+                </wpfui:Button.Effect>
+            </wpfui:Button>
+
+            <!-- Кнопка вывода средств -->
+            <wpfui:Button Content="Вывести" Width="150" Height="45" Background="#ff4500" Foreground="#ffffff" FontWeight="Bold"
+                      HorizontalAlignment="Center" Click="OpenWithdrawWindow_Click">
+                <wpfui:Button.Effect>
+                    <DropShadowEffect Color="#ff4500" ShadowDepth="0" BlurRadius="20"/>
+                </wpfui:Button.Effect>
+            </wpfui:Button>
+        </StackPanel>
+
+        <!-- Статус транзакций -->
+        <TextBlock Text="Транзакции:" FontWeight="Bold" Margin="20,300,0,0" Foreground="#ffcc00" FontSize="18"/>
+
+        <!-- Список транзакций -->
+        <wpfui:ListView x:Name="TransactionListView" Margin="20,300,20,80" Background="#333333" Foreground="#ffffff" BorderBrush="#ff4500" BorderThickness="1">
+            <wpfui:ListView.View>
+                <GridView>
+                    <!-- Колонка с датой -->
+                    <GridViewColumn Header="Дата" Width="200" DisplayMemberBinding="{Binding Transaction_Date}">
+                        <GridViewColumn.HeaderContainerStyle>
+                            <Style TargetType="GridViewColumnHeader">
+                                <Setter Property="Foreground" Value="#ffcc00"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            </Style>
+                        </GridViewColumn.HeaderContainerStyle>
+                    </GridViewColumn>
+
+                    <!-- Колонка с типом -->
+                    <GridViewColumn Header="Тип" Width="200" DisplayMemberBinding="{Binding Transaction_Type}">
+                        <GridViewColumn.HeaderContainerStyle>
+                            <Style TargetType="GridViewColumnHeader">
+                                <Setter Property="Foreground" Value="#ffcc00"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            </Style>
+                        </GridViewColumn.HeaderContainerStyle>
+                    </GridViewColumn>
+
+                    <!-- Колонка с суммой -->
+                    <GridViewColumn Header="Сумма" Width="200" DisplayMemberBinding="{Binding Amount}">
+                        <GridViewColumn.HeaderContainerStyle>
+                            <Style TargetType="GridViewColumnHeader">
+                                <Setter Property="Foreground" Value="#ffcc00"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            </Style>
+                        </GridViewColumn.HeaderContainerStyle>
+                    </GridViewColumn>
+
+                    <!-- Колонка со способом -->
+                    <GridViewColumn Header="Способ" Width="200" DisplayMemberBinding="{Binding Sposob}">
+                        <GridViewColumn.HeaderContainerStyle>
+                            <Style TargetType="GridViewColumnHeader">
+                                <Setter Property="Foreground" Value="#ffcc00"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            </Style>
+                        </GridViewColumn.HeaderContainerStyle>
+                    </GridViewColumn>
+                </GridView>
+            </wpfui:ListView.View>
+        </wpfui:ListView>
+        <wpfui:Button Content="Назад" Width="150" Height="45" Background="#ff4500" Foreground="#ffffff" FontWeight="Bold"
+                  HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20" Click="ButtonBack_Click">
+            <wpfui:Button.Effect>
+                <DropShadowEffect Color="#ff4500" ShadowDepth="0" BlurRadius="20"/>
+            </wpfui:Button.Effect>
+            <wpfui:Button.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+                                        To="#ff6347" Duration="0:0:0.3" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+                                        To="#ff4500" Duration="0:0:0.3" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </wpfui:Button.Triggers>
+        </wpfui:Button>
+
+    </Grid>
+</Page>
